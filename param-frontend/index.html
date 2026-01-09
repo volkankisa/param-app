@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Param Event – Test Paneli</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 700px; margin: 30px auto; }
+input, button { padding: 8px; margin-top: 6px; width: 100%; }
+label { display: block; margin-top: 6px; cursor: pointer; }
+button { cursor: pointer; }
+pre { background: #f4f4f4; padding: 12px; margin-top: 15px; white-space: pre-wrap; }
+hr { margin: 25px 0; }
+.success { background: #d4edda; color: #155724; }
+.error { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+<body>
+<h2>Param Event – Test Paneli</h2>
+
+<!-- Kayıt Ol -->
+<h3>Kayıt Ol</h3>
+<input id="regUsername" type="text" placeholder="Kullanıcı adı" />
+<input id="regPassword" type="password" placeholder="Şifre" />
+<label>
+<input type="checkbox" onclick="toggleRegPassword()"> Şifreyi Göster
+</label>
+<button onclick="register()">Kayıt Ol</button>
+<hr>
+
+<!-- Giriş -->
+<h3>Giriş Yap</h3>
+<input id="username" type="text" placeholder="Kullanıcı adı" />
+<input id="password" type="password" placeholder="Şifre" />
+<label>
+<input type="checkbox" onclick="togglePassword()"> Şifreyi Göster
+</label>
+<button onclick="login()">Giriş Yap</button>
+<hr>
+
+<!-- Kullanıcı Bilgileri -->
+<h3>Kullanıcı Bilgileri</h3>
+<button onclick="getProfile()">Bilgilerimi Göster</button>
+<hr>
+
+<!-- Bakiye -->
+<h3>Cüzdan Bakiyesi</h3>
+<button onclick="getBalance()">Bakiyeyi Göster</button>
+<hr>
+
+<!-- Cüzdana Para Yükle -->
+<h3>Cüzdana Para Yükle</h3>
+<input id="loadAmount" type="number" placeholder="Yüklenecek Tutar" />
+<button onclick="loadWallet()">Para Yükle</button>
+<hr>
+
+<!-- Ödeme Yap -->
+<h3>Ödeme Yap</h3>
+<input id="eventId" type="text" placeholder="Event ID (örn: event123)" />
+<input id="eventName" type="text" placeholder="Event Adı (örn: Konser Bileti)" />
+<input id="payAmount" type="number" placeholder="Ödenecek Tutar" />
+<button onclick="payEvent()">Ödeme Yap</button>
+<hr>
+
+<!-- Hesap Sil -->
+<h3>Hesabı Sil</h3>
+<button onclick="deleteAccount()" style="background: #dc3545; color: white;">Hesabı Kalıcı Olarak Sil</button>
+<hr>
+
+<!-- Çıkış -->
+<button onclick="logout()">Çıkış Yap</button>
+
+<h3>Sonuç</h3>
+<pre id="result">Hazır</pre>
+
+<!-- JS -->
+<script src="script.js"></script>
+</body>
+</html>
