@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/v1";
+const BASE_URL = "https://param-app.onrender.com/v1";
 
 /* =====================
    YARDIMCI
