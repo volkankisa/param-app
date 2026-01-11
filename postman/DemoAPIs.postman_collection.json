@@ -1,0 +1,509 @@
+{
+	"info": {
+		"_postman_id": "db8c2fd8-aeaa-4988-9ea3-8cdbd88533ac",
+		"name": "DemoAPIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "51275639",
+		"_collection_link": "https://volkankisa-7117523.postman.co/workspace/My-Workspace~44da1f4c-f645-4219-a786-b3a2fe0944fc/collection/51275639-db8c2fd8-aeaa-4988-9ea3-8cdbd88533ac?action=share&source=collection_link&creator=51275639"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Response is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"User ID exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.id).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Username exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.username).to.be.a('string');",
+							"});",
+							"",
+							"pm.test(\"Token exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.token).to.be.a('string');",
+							"});",
+							"",
+							"// Token'i otomatik kaydet (diğer testlerde kullanmak için)",
+							"if (pm.response.json().data && pm.response.json().data.token) {",
+							"    pm.environment.set(\"auth_token\", pm.response.json().data.token);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"adad\",\n  \"password\": \"1234\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/user/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status is SUCCESS\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Message contains 'başarılı'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.include('başarılı');",
+							"});",
+							"",
+							"pm.test(\"Token mevcut\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.token).to.exist;",
+							"    pm.expect(jsonData.data.token).to.be.a('string');",
+							"});",
+							"",
+							"// Token'i otomatik kaydet",
+							"if (pm.response.json().data && pm.response.json().data.token) {",
+							"    pm.environment.set(\"token\", pm.response.json().data.token);",
+							"    console.log(\"Token kaydedildi:\", pm.response.json().data.token);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"asass\",\n  \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/user/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet/Balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status is SUCCESS\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Balance exists and is a number\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.balance).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Currency is TRY\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.currency).to.eql('TRY');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"SUCCESS\",\n    \"balance\": 105,\n    \"currency\": \"TL\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/wallet/balance",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"wallet",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet/Load",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status is SUCCESS\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"New balance is a number\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.newBalance).to.be.a('number');",
+							"    pm.expect(jsonData.data.newBalance).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Added amount is correct\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.addedAmount).to.eql(100);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"amount\": 100\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/wallet/load",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"wallet",
+						"load"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event/Pay",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status is SUCCESS\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Payment ID exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.paymentId).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Remaining balance is a number\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.remainingBalance).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Payment message is successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.include('başarılı');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"eventId\": \"event123\",\n  \"eventName\": \"Konser Bileti\",\n  \"amount\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/event/pay",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"event",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User/Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Profile retrieved successfully\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"User ID exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.id).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Username exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.username).to.be.a('string');",
+							"});",
+							"",
+							"pm.test(\"Balance exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.balance).to.be.a('number');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/user/profile",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Account deleted successfully\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Success message exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.include('silindi');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/user/delete",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
