@@ -10,6 +10,9 @@ const BASE_URL = "http://localhost:3000";
     // 1️⃣ Frontend sayfasını aç
     await driver.get("http://127.0.0.1:5500/index.html"); // Live Server URL
 
+    // NOTE: Delay added for demo purposes to visualize Selenium execution
+    await driver.sleep(3000);
+    
     // 2️⃣ Kullanıcı adı ve şifreyi inputlara yaz
     await driver.findElement(By.id("username")).sendKeys("param_user");
     await driver.findElement(By.id("password")).sendKeys("1234");
@@ -42,7 +45,7 @@ const BASE_URL = "http://localhost:3000";
     // 7️⃣ Ekrandaki sonucu oku (UI testi)
     const uiResult = await driver.findElement(By.id("result")).getText();
     console.log("🖥️ UI sonucu:", uiResult);
-
+    
   } catch (err) {
     console.error("❌ Hata:", err);
   } finally {

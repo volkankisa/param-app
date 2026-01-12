@@ -1,84 +1,168 @@
 # Param Event - Payment System
+## 🎓 Term Project – API & UI Test Automation
+
+This project was developed as part of the **API & UI Test Automation** course.  
+It includes **manual testing**, **API test automation using Postman**, and **UI test automation using Selenium WebDriver**.
 
 Full-stack payment application with backend API and frontend interface.
+
+---
 
 ## 🚀 Live Demo
 
 - **Frontend:** https://param-app-e7qs.vercel.app
 - **Backend API:** https://param-app.onrender.com
 
+---
+
 ## 📋 Postman Collection
 
-API endpoint'lerini test etmek için Postman collection'ı kullanabilirsiniz:
+You can use the Postman collection to test API endpoints:
 
 👉 [Postman Collection](./postman/param-app-collection.json)
 
-### Nasıl Import Edilir?
+### How to Import
 
-1. Postman'i açın
-2. Import → Upload Files
-3. `postman/param-app-collection.json` dosyasını seçin
+1. Open Postman
+2. Click **Import → Upload Files**
+3. Select `postman/param-app-collection.json`
 
-## 🛠️ Teknolojiler
+### Test Scope
+The Postman collection includes:
+- At least 5 different API endpoints
+- HTTP methods: **GET, POST, PUT, DELETE**
+- Positive, negative, and edge case scenarios
+- Status code validations
+- Response body assertions
+- Collection Runner execution support
 
-**Backend:**
+---
+
+## 🧪 UI Test Automation – Selenium
+
+UI test automation is implemented using **Selenium WebDriver**.
+
+### Scope
+- Automated login scenario
+- UI interaction testing (inputs, buttons, result validation)
+- Integration with backend API during test execution
+
+### How to Run UI Tests
+
+#### Prerequisites
 - Node.js
-- Express.js
-- JWT Authentication
-- bcryptjs
+- Google Chrome
+- Backend must be running on `http://localhost:3000`
+- UI must be served via **Live Server**
 
-**Frontend:**
-- HTML5
-- Vanilla JavaScript
-- CSS3
+#### Steps
+1. Start backend:
+   ```bash
+   cd backend
+   npm install
+   npm start
+Open frontend/index.html using Live Server in VS Code
 
-**Deployment:**
-- Backend: Render
-- Frontend: Vercel
+Run Selenium test:
 
-**CI/CD:**
-- GitHub Actions
+bash
+Copy code
+cd ui-tests/selenium
+npm install
+node seleniumTest.js
+Notes
+A short delay is intentionally added for visual verification during demo
 
-## 📦 Kurulum
+Tests may fail if the backend or Live Server is not running, which is an expected behavior
 
-### Backend
-```bash
+🛠️ Technologies
+Backend:
+
+Node.js
+
+Express.js
+
+JWT Authentication
+
+bcryptjs
+
+Frontend:
+
+HTML5
+
+Vanilla JavaScript
+
+CSS3
+
+Test Automation:
+
+Postman
+
+Selenium WebDriver
+
+Axios
+
+Deployment:
+
+Backend: Render
+
+Frontend: Vercel
+
+CI/CD:
+
+GitHub Actions
+
+📦 Installation
+Backend
+bash
+Copy code
 cd backend
 npm install
-npm run dev
-```
+npm start
+Frontend
+Open frontend/index.html using Live Server in VS Code.
 
-### Frontend
+📚 API Endpoints
+User
+POST /v1/user/register – Register user
 
-VS Code'da `frontend/index.html` dosyasını Live Server ile açın.
+POST /v1/user/login – User login
 
-## 📚 API Endpoints
+GET /v1/user/profile – Get user profile
 
-### User
-- `POST /v1/user/register` - Kayıt ol
-- `POST /v1/user/login` - Giriş yap
-- `GET /v1/user/profile` - Profil bilgisi
-- `DELETE /v1/user/delete` - Hesap sil
+DELETE /v1/user/delete – Delete user account
 
-### Wallet
-- `GET /v1/wallet/balance` - Bakiye sorgula
-- `POST /v1/wallet/load` - Bakiye yükle
+Wallet
+GET /v1/wallet/balance – Get wallet balance
 
-### Event
-- `POST /v1/event/pay` - Ödeme yap
+POST /v1/wallet/load – Load wallet balance
 
-## 🔐 Environment Variables
+Event
+POST /v1/event/pay – Make payment
 
-Backend için `.env` dosyası oluşturun:
-```env
+🔐 Environment Variables
+Create a .env file in the backend directory:
+
+env
+Copy code
 PORT=3000
 JWT_SECRET=your_secret_key_here
-```
+👤 Project Roles
+QA Lead & Test Analyst: Manual testing, test scenarios, acceptance criteria
 
-## 👥 Geliştirici
+API Automation Engineer: Postman API test automation
+
+UI Automation Engineer: Selenium UI test automation
+
+SDET & Automation Support: Test executability, environment setup, automation stability
+
+👥 Developers
+Volkan Kısa
+Selahattin Oktan
+Doğa Özdür
+Eren Efe Taşlıyurt
 
 [Volkan Kısa](https://github.com/volkankisa)
 
-## 📄 License
-
+📄 License
 MIT
