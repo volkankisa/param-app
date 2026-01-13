@@ -48,7 +48,7 @@
 							"    // Token'i kaydet - YENİ",
 							"    var jsonData = pm.response.json();",
 							"    if (jsonData.data && jsonData.data.token) {",
-							"        pm.environment.set(\"auth_token\", jsonData.data.token);",
+							"        pm.environment.set(\"token\", jsonData.data.token);",
 							"        console.log(\"Token kaydedildi (Register):\", jsonData.data.token);",
 							"    }",
 							"}"
@@ -60,6 +60,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -117,7 +127,7 @@
 							"        pm.expect(jsonData.data.token).to.be.a('string');",
 							"        ",
 							"        // Token'i environment'a kaydet",
-							"        pm.environment.set(\"auth_token\", jsonData.data.token);",
+							"        pm.environment.set(\"token\", jsonData.data.token);",
 							"        console.log(\"Token kaydedildi:\", jsonData.data.token);",
 							"    });",
 							"}"
@@ -129,6 +139,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
