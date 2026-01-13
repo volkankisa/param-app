@@ -62,6 +62,21 @@ app.post('/v1/user/register', async (req, res) => {
         message: 'Kullanıcı adı ve şifre gerekli'
       });
     }
+    // Username uzunluk kontrolü
+    if (username.length > 20) {
+      return res.status(400).json({
+        success: false,
+        message: 'Kullanıcı adı maksimum 20 karakter olabilir'
+      });
+    }
+
+    // Username minimum kontrolü (opsiyonel)
+    if (username.length < 3) {
+      return res.status(400).json({
+        success: false,
+        message: 'Kullanıcı adı minimum 3 karakter olmalıdır'
+      });
+    }
 
     const userExists = users.find(u => u.username === username);
     if (userExists) {
@@ -249,6 +264,14 @@ app.put('/v1/wallet/load', authenticateToken, (req, res) => {
       return res.status(400).json({
         success: false,
         message: 'Geçerli bir miktar giriniz'
+      });
+    }
+    
+    // Maksimum yükleme limiti kontrolü
+    if (amount > 100000) {
+      return res.status(400).json({
+        success: false,
+        message: 'Maksimum yükleme limiti 100,000 TL'
       });
     }
 
