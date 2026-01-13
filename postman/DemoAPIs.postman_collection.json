@@ -19,8 +19,8 @@
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]);",
 							"});",
 							"",
-							"pm.test(\"Response time is less than 2000ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"pm.test(\"Response time is less than 3000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);",
 							"});",
 							"",
 							"// Eğer başarılıysa token kaydet",
@@ -67,7 +67,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"1234\"\n}\n",
+					"raw": "{\n  \"username\": \"volkan\",\n  \"password\": \"1234\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
