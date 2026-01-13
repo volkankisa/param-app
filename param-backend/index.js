@@ -241,7 +241,7 @@ app.get('/v1/wallet/balance', authenticateToken, (req, res) => {
   }
 });
 
-app.post('/v1/wallet/load', authenticateToken, (req, res) => {
+app.put('/v1/wallet/load', authenticateToken, (req, res) => {
   try {
     const { amount } = req.body;
 
